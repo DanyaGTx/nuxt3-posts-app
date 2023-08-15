@@ -9,13 +9,10 @@
       >
     </div>
     <h2>Posts</h2>
-    <div v-if="!isLoading">
-      <div v-for="post in postsStore.posts" :key="post.id">
-        <p>Post # {{ post.id }}</p>
-        <p>Info: {{ post.title }}</p>
-      </div>
+    <div v-for="post in postsStore.posts" :key="post.id">
+      <p>Post # {{ post.id }}</p>
+      <p>Info: {{ post.title }}</p>
     </div>
-    <div v-else>Loding...</div>
   </div>
 </template>
 

@@ -31,21 +31,24 @@ const createNewPost = () => {
       title: postDescription.value,
     })
     .then((response) => {
-      console.log(response.data); // сэтнуть в стор ?
-      const newPost = {
-        id: postsStore.posts.length + 1,
-        title: postDescription.value,
-      };
-      postsStore.posts.push(newPost);
+      if (postDescription.value) {
+        const newPost = {
+          id: postsStore.posts.length + 1,
+          title: postDescription.value,
+        };
+        postsStore.posts.push(newPost);
 
-      if (existingMyPosts) {
-        myPosts.value = JSON.parse(existingMyPosts);
+        if (existingMyPosts) {
+          myPosts.value = JSON.parse(existingMyPosts);
+        }
+        postDescription.value = "";
+        myPosts.value.push(newPost);
+        localStorage.setItem("myPosts", JSON.stringify(myPosts.value));
+        alert("Your post was added");
+        navigateTo("/");
+      } else {
+        alert("TextArea can't be empty");
       }
-      postDescription.value = "";
-      myPosts.value.push(newPost);
-      localStorage.setItem("myPosts", JSON.stringify(myPosts.value));
-      alert("Your post was added");
-      navigateTo("/");
     })
     .catch((error) => {
       console.log(error);
